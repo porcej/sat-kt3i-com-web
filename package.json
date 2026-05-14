@@ -1,0 +1,18 @@
+{
+  "name": "sat-kt3i-com-web",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev:web & npm run dev:worker",
+    "dev:web": "npm run dev --workspace=@sat/web",
+    "dev:worker": "npm run dev --workspace=@sat/worker",
+    "build": "npm run build --workspace=@sat/web && npm run build --workspace=@sat/worker",
+    "test": "npm run test --workspace=@sat/web --if-present && npm run test --workspace=@sat/worker --if-present"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

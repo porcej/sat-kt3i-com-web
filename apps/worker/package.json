@@ -1,0 +1,21 @@
+{
+  "name": "@sat/worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "build": "tsc -p tsconfig.json --noEmit",
+    "deploy": "wrangler deploy",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@sat/shared": "*",
+    "hono": "^4.6.14"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250525.0",
+    "typescript": "^5.7.3",
+    "vitest": "~3.0.5",
+    "wrangler": "^3.103.2"
+  }
+}
