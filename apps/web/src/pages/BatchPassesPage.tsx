@@ -282,7 +282,7 @@ export default function BatchPassesPage() {
   return (
     <AppShell
       pageTitle="Batch pass predictions"
-      pageDescription="Choose satellites, a time window, and minimum elevation — one combined table sorted by AOS."
+      pageDescription="Bulk pass predictions for multiple satellites in a time window."
     >
       <main className="mx-auto flex w-full min-w-0 max-w-6xl flex-col gap-6 px-4 py-6">
         <Card>

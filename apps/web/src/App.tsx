@@ -216,7 +216,7 @@ export default function App() {
   return (
     <AppShell
       pageTitle="Satellite passes"
-      pageDescription="CelesTrak data, SGP4 in your browser, Cloudflare-ready stack"
+      pageDescription="Satellite pass predictions by KT3I"
     >
       <main className="mx-auto grid w-full min-w-0 max-w-6xl gap-6 px-4 py-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
         <div className="flex min-w-0 flex-col gap-6">
