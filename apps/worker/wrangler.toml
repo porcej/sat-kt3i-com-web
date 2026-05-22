@@ -9,8 +9,8 @@ HARD_TTL_MINUTES = "720"
 
 [[kv_namespaces]]
 binding = "TLE_KV"
-id = "YOUR_KV_NAMESPACE_ID"
-preview_id = "YOUR_PREVIEW_KV_NAMESPACE_ID"
+id = "14236d7044d745108861e3c2b889f564"
+preview_id = "1f55c65be925448ba56224fd1c0f167d"
 
 [triggers]
 crons = ["0 */4 * * *"]

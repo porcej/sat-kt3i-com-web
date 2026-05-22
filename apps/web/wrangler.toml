@@ -1,0 +1,9 @@
+# Optional: deploy the SPA with `npx wrangler pages deploy dist` from apps/web
+# after `npm run build`. Binds the sat-api Worker so /api/* works on the same origin.
+name = "sat-web"
+pages_build_output_dir = "dist"
+compatibility_date = "2024-12-01"
+
+[[services]]
+binding = "SAT_API"
+service = "sat-api"

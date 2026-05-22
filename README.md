@@ -36,9 +36,12 @@ The Vite dev server proxies `/api/*` to `http://127.0.0.1:8787` (see [`apps/web/
 
 **Web:**
 
-- `VITE_API_BASE` — optional absolute origin for the API in production (e.g. `https://api.example.com`). Leave unset when the SPA is served from the same origin as `/api` (recommended: route `/api/*` on your zone to the Worker).
+- `VITE_API_BASE` — **required for typical Cloudflare Pages deploys.** Set to your Worker URL (e.g. `https://sat-api.<account>.workers.dev` from `wrangler deploy` in `apps/worker`). The app calls `${VITE_API_BASE}/api/...` directly; the build also writes `_redirects` so same-origin `/api/*` is not served as `index.html`.
+- Leave unset only if you route `/api/*` on your zone to the Worker **before** Pages, or deploy the site with [`apps/web/wrangler.toml`](apps/web/wrangler.toml) (`SAT_API` service binding + `functions/api`).
 
-See [`apps/web/.env.example`](apps/web/.env.example).
+See [`apps/web/.env.example`](apps/web/.env.example) and [`apps/web/.env.production.example`](apps/web/.env.production.example).
+
+**If the UI shows** `Unexpected token '<'` **or** “API returned HTML instead of JSON”, Pages is returning the SPA for `/api/*`. Fix: set `VITE_API_BASE` on the Pages project and redeploy, or add a zone route `yourdomain.com/api/*` → Worker.
 
 ## Data freshness (KV + cron)
 
@@ -60,7 +63,8 @@ CelesTrak GP JSON is the canonical catalog fields; the Worker also fetches `FORM
 3. Create a Pages project pointing at this repo with:
    - **Build command:** `npm run build --workspace=@sat/web`
    - **Build output directory:** `apps/web/dist` (root directory = repository root), **or** set root to `apps/web` and use `npm run build` / `dist`.
-4. On your Cloudflare **zone**, route `example.com/api/*` to the Worker and `example.com/*` to Pages so the SPA can use relative `/api` calls with `VITE_API_BASE` empty.
+4. **Pages build environment:** add `VITE_API_BASE` = `https://sat-api.<your-subdomain>.workers.dev` (from step 2). Redeploy the Pages project.
+5. Alternatively, on your Cloudflare **zone**, route `example.com/api/*` to the Worker and `example.com/*` to Pages (then `VITE_API_BASE` can stay empty), or deploy the web app with `cd apps/web && npx wrangler pages deploy dist` using [`apps/web/wrangler.toml`](apps/web/wrangler.toml) (service binding to `sat-api`).
 
 Do **not** expose Space-Track credentials to Pages or the browser; they belong only in Worker secrets.
 
